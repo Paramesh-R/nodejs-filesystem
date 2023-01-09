@@ -39,12 +39,11 @@ app.use("/viewfile", (req, res) => {
 })
 
 // Create file with current timestamp 
-// and 
-// file name as date-time.txt
 app.use("/createfile", (req, res) => {
     let date = new Date();
     let strDateTime = date.toLocaleDateString() + " " + date.toLocaleTimeString()
-    let strDateTimeTxt = strDateTime.replaceAll("/", "-").replaceAll(":", "-");
+    // let strDateTimeTxt = strDateTime.replaceAll("/", "-").replaceAll(":", "-");
+    let strDateTimeTxt = strDateTime.split("/").join("-").split(":").join("-");
     target_directory = path.join(__dirname, 'files', strDateTimeTxt + ".txt");
     fs.writeFileSync(target_directory, strDateTime, 'utf-8');
 
